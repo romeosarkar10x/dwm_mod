@@ -3,7 +3,6 @@ Language:        Cpp
 BasedOnStyle:  LLVM
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
-# AlignAfterOpenBracket: Align
 AlignArrayOfStructures: Right
 
 AlignConsecutiveAssignments:
@@ -63,11 +62,10 @@ AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: All
 AllowShortLoopsOnASingleLine: false
 
-# AlwaysBreakAfterDefinitionReturnType: None
-# AlwaysBreakAfterReturnType: None
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: Yes
-# BreakTemplateDeclarations: Yes
 
 AttributeMacros:
   - __capability
