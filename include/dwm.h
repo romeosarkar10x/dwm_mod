@@ -77,7 +77,7 @@ enum {
     NetWMWindowTypeDialog,
     NetClientList,
     NetLast
-};                                                                                              /* EWMH atoms */
+}; /* EWMH atoms */
 
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast };                                   /* default atoms */
 
@@ -267,6 +267,7 @@ static int bh;     /* bar height */
 static int lrpad;  /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display*, XErrorEvent*);
 static unsigned int numlockmask = 0;
+
 static void (*handler[LASTEvent])(XEvent*) = { [ButtonPress] = buttonpress,
                                                [ClientMessage] = clientmessage,
                                                [ConfigureRequest] = configurerequest,
@@ -281,6 +282,7 @@ static void (*handler[LASTEvent])(XEvent*) = { [ButtonPress] = buttonpress,
                                                [MotionNotify] = motionnotify,
                                                [PropertyNotify] = propertynotify,
                                                [UnmapNotify] = unmapnotify };
+
 static Atom wmatom[WMLast], netatom[NetLast];
 static int running = 1;
 static Cur* cursor[CurLast];

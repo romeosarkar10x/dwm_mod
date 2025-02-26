@@ -1,6 +1,0 @@
-static const char col_gray1[] = "#282a36"; // Background (dark)
-static const char col_gray2[] = "#44475a"; // Inactive border (subtle gray)
-static const char col_gray3[] = "#f8f8f2"; // Foreground (whiteish text)
-static const char col_gray4[] = "#6272a4"; // Selected foreground (soft purple)
-static const char col_gray5[] = "#bd93f9"; // Highlight (purple)
-static const char col_cyan[] = "#50fa7b";  // Active border (green accent)

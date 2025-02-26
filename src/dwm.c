@@ -1,4 +1,5 @@
 #include "config.h"
+#include "X11/XKBlib.h"
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags
@@ -752,15 +753,20 @@ static int isuniquegeom(XineramaScreenInfo* unique, size_t n, XineramaScreenInfo
 
 void keypress(XEvent* e)
 {
-    unsigned int i;
     KeySym keysym;
     XKeyEvent* ev;
 
     ev = &e->xkey;
-    keysym = XKeycodeToKeysym(dpy, (KeyCode) ev->keycode, 0);
-    for(i = 0; i < LENGTH(keys); i++)
+    // keysym = XKeycodeToKeysym(dpy, (KeyCode) ev->keycode, 0);
+    keysym = XkbKeycodeToKeysym(dpy, (KeyCode) ev->keycode, 0, 0);
+
+    for(unsigned int i = 0; i < LENGTH(keys); i++)
+    {
         if(keysym == keys[i].keysym && CLEANMASK(keys[i].mod) == CLEANMASK(ev->state) && keys[i].func)
+        {
             keys[i].func(&(keys[i].arg));
+        }
+    }
 }
 
 void killclient(const Arg* arg)
@@ -812,7 +818,7 @@ void manage(Window w, XWindowAttributes* wa)
         c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
     c->x = MAX(c->x, c->mon->wx);
     c->y = MAX(c->y, c->mon->wy);
-    c->bw = borderpx;
+    c->bw = border_px;
 
     wc.border_width = c->bw;
     XConfigureWindow(dpy, w, CWBorderWidth, &wc);
@@ -1146,8 +1152,12 @@ void run(void)
     /* main event loop */
     XSync(dpy, False);
     while(running && !XNextEvent(dpy, &ev))
+    {
         if(handler[ev.type])
+        {
             handler[ev.type](&ev); /* call handler */
+        }
+    }
 }
 
 void scan(void)
@@ -1901,26 +1911,38 @@ void zoom(const Arg* arg)
 }
 
 int main(int argc, char* argv[])
-
-
 {
     if(argc == 2 && !strcmp("-v", argv[1]))
+    {
         die("dwm-" VERSION);
+    }
     else if(argc != 1)
+    {
         die("usage: dwm [-v]");
+    }
+
     if(!setlocale(LC_CTYPE, "") || !XSupportsLocale())
+    {
         fputs("warning: no locale support\n", stderr);
+    }
     if(!(dpy = XOpenDisplay(NULL)))
+    {
         die("dwm: cannot open display");
+    }
+
     checkotherwm();
     setup();
+
 #ifdef __OpenBSD__
     if(pledge("stdio rpath proc exec", NULL) == -1)
         die("pledge");
 #endif /* __OpenBSD__ */
+
     scan();
     run();
+
     cleanup();
     XCloseDisplay(dpy);
+
     return EXIT_SUCCESS;
 }
