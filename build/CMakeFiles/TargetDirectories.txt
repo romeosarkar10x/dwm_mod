@@ -1,7 +1,0 @@
-/home/romeo/dwm/build/CMakeFiles/dwm.dir
-/home/romeo/dwm/build/CMakeFiles/edit_cache.dir
-/home/romeo/dwm/build/CMakeFiles/rebuild_cache.dir
-/home/romeo/dwm/build/CMakeFiles/list_install_components.dir
-/home/romeo/dwm/build/CMakeFiles/install.dir
-/home/romeo/dwm/build/CMakeFiles/install/local.dir
-/home/romeo/dwm/build/CMakeFiles/install/strip.dir
